@@ -1,0 +1,5 @@
+{
+    "videoExts": [".AVI","FLV",".M4V",".MKV",".MP4",".MPG",".WTV"],
+    "skipFiles": ["SAMPLE","ETRG","RARBG.COM","EXTRATORRENTRG"],
+    "videoProgramPath": ["C:\","Program Files (x86)","VideoLAN","VLC","vlc.exe"]
+}
