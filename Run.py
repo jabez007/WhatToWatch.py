@@ -26,11 +26,11 @@ from Splash import Splash
 
 """
 ----------
-    NAME:
-    DESCRIPTION:
+    NAME: WhatToWatch
+    DESCRIPTION: User Interface for selecting which video to watch
     KEYWORDS:
     CALLED BY: main
-    EXTENDS:
+    EXTENDS: Tkinter.Frame
     ASSUMES:
     SIDE EFFECTS:
 """
@@ -38,14 +38,16 @@ class WhatToWatch(Frame):
 
     """
     ----------
-        NAME:
-        DESCRIPTION:
-        KEYWORDS:
-        CALLED BY:
+        NAME: __init__
+        DESCRIPTION: initializer for WhatToWatch object
+        KEYWORDS: init
+        CALLED BY: WhatToWatch
         PARAMETERS:
+                parent:
+                args:
         RETURNS:
         ASSUMES:
-        SIDE EFFECTS:
+        SIDE EFFECTS: sets instance attributes
     """
     def __init__(self, parent, args):
         Frame.__init__(self, parent)
@@ -55,18 +57,18 @@ class WhatToWatch(Frame):
         self.load_configuration()
         self.name_location = {}
         self.watch_me(args[0])  # SEARCHFOLDER = "\\\\RT-AC68U-1D30\\Libraries\\Videos"
-        self.initUI()
+        self.init_ui()
 
     """
     ----------
-        NAME:
-        DESCRIPTION:
-        KEYWORDS:
-        CALLED BY:
+        NAME: load_configuration
+        DESCRIPTION: Loads configuration from config file
+        KEYWORDS: configuration
+        CALLED BY: __init__
         PARAMETERS:
         RETURNS:
         ASSUMES:
-        SIDE EFFECTS:
+        SIDE EFFECTS: sets instance attributes from config file
     """
     def load_configuration(self):
         with open('config') as f:
@@ -78,14 +80,16 @@ class WhatToWatch(Frame):
 
     """
     ----------
-        NAME:
-        DESCRIPTION:
-        KEYWORDS:
-        CALLED BY:
+        NAME: watch_me
+        DESCRIPTION: searches folder defined in args for unwatched (based on creation and last access time)
+            videos (based on videoExts defined in config file)
+        KEYWORDS: search
+        CALLED BY: __init__
         PARAMETERS:
+            folder: folder to search through, defined in args passed in
         RETURNS:
         ASSUMES:
-        SIDE EFFECTS:
+        SIDE EFFECTS: sets instance attribute, dict(filename: filepath)
     """
     def watch_me(self, folder):
         now = datetime.fromtimestamp(time.time())
@@ -104,14 +108,14 @@ class WhatToWatch(Frame):
 
     """
     ----------
-        NAME:
-        DESCRIPTION:
-        KEYWORDS:
-        CALLED BY:
+        NAME: init_ui
+        DESCRIPTION: builds the GUI where a user can select which video to watch
+        KEYWORDS: Initialize, User Interface
+        CALLED BY: WhatToWatch
         PARAMETERS:
         RETURNS:
         ASSUMES:
-        SIDE EFFECTS:
+        SIDE EFFECTS: Builds graphical components for user interface
     """
     def init_ui(self):
         self.parent.title("Downloads to Watch")
@@ -147,14 +151,15 @@ class WhatToWatch(Frame):
 
     """
     ----------
-        NAME:
-        DESCRIPTION:
-        KEYWORDS:
-        CALLED BY:
+        NAME: on_double
+        DESCRIPTION: Opens selected video with program defined in config file
+        KEYWORDS: open
+        CALLED BY: self.LB
         PARAMETERS:
+            event:
         RETURNS:
         ASSUMES:
-        SIDE EFFECTS:
+        SIDE EFFECTS: Plays video
     """
     def on_double(self, event):
         widget = event.widget
@@ -167,14 +172,15 @@ class WhatToWatch(Frame):
 
 """
 ----------
-    NAME:
-    DESCRIPTION:
-    KEYWORDS:
-    CALLED BY:
+    NAME: main
+    DESCRIPTION: Fires off splash page while WhatToWatch searches for unwatch videos
+    KEYWORDS: main, splash
+    CALLED BY: user
     PARAMETERS:
+        args: folder to search, input by user
     RETURNS:
     ASSUMES:
-    SIDE EFFECTS:
+    SIDE EFFECTS: Starts GUI
 """
 def main(args):
     root = Tk()
